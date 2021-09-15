@@ -12,6 +12,7 @@ import {
     Heading,
 } from '@chakra-ui/react';
 import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
+import {Link as ReLink} from 'react-router-dom';
 
 
 
@@ -50,14 +51,14 @@ export default function Header() {
                         onClick={isOpen ? onClose : onOpen}
                     />
                     <Box p="2">
-                        <Heading size="md">Logo</Heading>
+                        <Heading to="/" as={ReLink} size="md">Logo</Heading>
                     </Box>
                     <Spacer />
                     <Box display={{ base: 'none', md: 'flex' }}>
                         <Button colorScheme="green" mr="4">
                             Sign Up
                         </Button>
-                        <Button colorScheme="green">Log in</Button>
+                        <Button as={ReLink} colorScheme="green" to="/login">Log in</Button>
                     </Box>
                 </Flex>
                 {isOpen ? (
