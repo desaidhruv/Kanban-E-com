@@ -13,7 +13,7 @@ function HomeScreen() {
   return (
     <>
       <SimpleGrid pt="20px" spacing="100px" columns={[1, 2, 3, 4]}>
-     { products.map(product => (
+        {products.map(product => (
         <Box
           key={product._id}
           w="300px" 
