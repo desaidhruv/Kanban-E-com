@@ -1,8 +1,6 @@
 import {
     Box,
     Flex,
-    HStack,
-    Link,
     IconButton,
     useDisclosure,
     useColorModeValue,

@@ -1,48 +1,37 @@
 import React from 'react';
-import { Box, HStack, Grid, Flex, useColorModeValue } from '@chakra-ui/react';
+import { Box, Image, SimpleGrid, } from '@chakra-ui/react';
+import products from '../products';
 
 function Product({ product }) {
   return (
-    <Flex
-      bg={useColorModeValue('#F9FAFB', 'gray.600')}
-      p={50}
-      w="full"
-      alignItems="center"
-      justifyContent="center"
-    >
-      <Flex
-        maxW="md"
-        mx="auto"
-        bg={useColorModeValue('white', 'gray.800')}
-        shadow="lg"
+    <>
+      <Box
+        key={product._id}
+        w="300px"
+        borderWidth="1px"
         rounded="lg"
-        overflow="hidden"
+        shadow="lg"
       >
-        <Box
-          w={1 / 3}
-          bgSize="cover"
-          style={{
-            backgroundImage:
-              "url('https://images.unsplash.com/photo-1494726161322-5360d4d0eeae?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80')",
-          }}
-        ></Box>
-        <Box maxW="sm" borderWidth="1px" borderRadius="lg" overflow="hidden">
-          {/* <Image src={product.imageUrl} alt={product.imageAlt} /> */}
-          <Box p="6">
-            <Box
-              mt="1"
-              fontWeight="semibold"
-              as="h4"
-              lineHeight="tight"
-              isTruncated
-            >
-              {product.name}
-            </Box>
-            <Box>{product.price}</Box>
+        <a href={`/product/${product._id}`} >
+
+          <Box position="relative" w="100%">
+            <Image src={product.image}></Image>
           </Box>
+        </a>
+        <Box pl="20px">
+          <Box
+            pt="20px"
+            mt="1"
+            fontWeight="bold"
+            fontSize="25px"
+            lineHeight="tight"
+          ></Box>
+          <Box>{product.name}</Box>
+          <Box> $ {product.price}</Box>
+          <Box> {product.rating}</Box>
         </Box>
-      </Flex>
-    </Flex>
+      </Box>
+    </>
   );
 }
 
