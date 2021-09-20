@@ -3,10 +3,10 @@ import { ChakraProvider, theme, Container } from '@chakra-ui/react';
 import { ColorModeSwitcher } from './ColorModeSwitcher';
 import Header from './components/Header';
 import Footer from './components/Footer';
-import Card from './components/Card';
 import HomeScreen from './screens/HomeScreen';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import login from './components/Login';
+import productScreen from './screens/ProductScreen';
 
 function App() {
   return (
@@ -18,6 +18,7 @@ function App() {
           <Switch>
             <Route exact path="/" component={HomeScreen} />
             <Route path="/login" component={login} />
+            <Route path="/product/:id" component={productScreen} />
           </Switch>
           {/* <HomeScreen /> */}
           {/* <Card /> */}
