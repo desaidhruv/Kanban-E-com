@@ -9,7 +9,7 @@ function ProductScreen({ match }) {
     return (
         <div>
             <Link href="/">Go Back</Link><br/>
-            {product.name}
+            Hello {product.name}
         </div>
     )
 }
