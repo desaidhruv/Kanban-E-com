@@ -1,7 +1,6 @@
 import React from 'react';
 import { Box, Image, SimpleGrid,Link } from '@chakra-ui/react';
 import {Link as ReLink} from "react-router-dom"
-import products from '../products';
 
 function Product({ product }) {
   return (
@@ -12,11 +11,12 @@ function Product({ product }) {
         borderWidth="1px"
         rounded="lg"
         shadow="lg"
+        h="400px"
       >
         <Link as={ReLink} to={`/product/${product._id}`} >
 
           <Box position="relative" w="100%">
-            <Image src={product.image}></Image>
+            <Image src={product.image} h="250px" w="300px"></Image>
           </Box>
         </Link>
         <Box pl="20px">
