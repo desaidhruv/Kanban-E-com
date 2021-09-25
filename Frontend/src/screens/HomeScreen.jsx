@@ -1,17 +1,29 @@
-import products from '../products';
 import Product from '../components/Product';
-import { React} from 'react';
-import { Box, Image, SimpleGrid, } from '@chakra-ui/react';
+import Loading from '../components/Loading';
+import { React, useEffect } from 'react';
+import { Box, Image, SimpleGrid, Heading } from '@chakra-ui/react';
+import { useDispatch, useSelector } from 'react-redux'
+import { listProducts } from '../actions/productActions'
 
 function HomeScreen() {
-  console.log(products);
+  const dispatch = useDispatch()
+  const productList = useSelector(state => state.productList)
+  const { error, loading, products } = productList
+
+  useEffect(() => {
+    dispatch(listProducts())
+  }, [dispatch])
+
   return (
     <>
-      <SimpleGrid pt="20px" spacing="100px" columns={[1, 2, 3, 4]}>
-      {products.map(product => (
-        <Product product={product} />
-      ))}
-      </SimpleGrid>
+      {loading ? <Loading /> 
+        : error ? <Loading /> 
+          : <SimpleGrid pt="20px" spacing="100px" columns={[1, 2, 3, 4]}>
+            {products.map(product => (
+              <Product product={product} key={product._id}/>
+            ))}
+            </SimpleGrid>
+      }
     </>
   );
 }

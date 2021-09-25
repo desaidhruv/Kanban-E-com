@@ -1,4 +1,4 @@
-import React from 'react';
+import {React, useState, useEffect} from 'react';
 import products from '../products';
 import {
   Link,
@@ -20,10 +20,22 @@ import {
 } from '@chakra-ui/react';
 
 import { Link as ReLink } from 'react-router-dom';
-import Product from '../components/Product';
+import axios from 'axios'
 
 function ProductScreen({ match }) {
-  const product = products.find(p => p._id === match.params.id);
+  const [product, setProduct] = useState([])
+  console.log(products);
+  useEffect(() => {
+
+    async function fetchProduct(){
+      const { data } = await axios.get(`/api/products/${match.params.id}`)
+      setProduct(data)
+    }
+    fetchProduct()
+
+  }, [])
+  // const product = products.find(p => p._id === match.params.id);
+  
   return (
     <>
       {/* '_id': '1',
