@@ -1,7 +1,8 @@
 import Product from '../components/Product';
 import Loading from '../components/Loading';
+import Message from '../components/Message';
 import { React, useEffect } from 'react';
-import { Box, Image, SimpleGrid, Heading } from '@chakra-ui/react';
+import { SimpleGrid, AlertIcon } from '@chakra-ui/react';
 import { useDispatch, useSelector } from 'react-redux'
 import { listProducts } from '../actions/productActions'
 
@@ -17,7 +18,7 @@ function HomeScreen() {
   return (
     <>
       {loading ? <Loading /> 
-        : error ? <Loading /> 
+        : error ? <Message status="error"><AlertIcon />{error}</Message> 
           : <SimpleGrid pt="20px" spacing="100px" columns={[1, 2, 3, 4]}>
             {products.map(product => (
               <Product product={product} key={product._id}/>
