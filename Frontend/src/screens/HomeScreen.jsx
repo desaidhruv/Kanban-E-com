@@ -18,7 +18,7 @@ function HomeScreen() {
   return (
     <>
       {loading ? <Loading /> 
-        : error ? <Message status="error"><AlertIcon />{error}</Message> 
+        : error ? <Loading /> 
           : <SimpleGrid pt="20px" spacing="100px" columns={[1, 2, 3, 4]}>
             {products.map(product => (
               <Product product={product} key={product._id}/>
