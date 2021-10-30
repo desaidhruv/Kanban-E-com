@@ -1,7 +1,6 @@
 import { React, useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import {
-  Link,
   Box,
   Stack,
   Center,
@@ -10,13 +9,18 @@ import {
   Button,
   Table,
   VStack,
-  Tbody,
   Tr,
+  Tbody,
   Td,
+  Spacer,
+  Heading,
+  Text,
 } from '@chakra-ui/react';
 
-import { Link as ReLink } from 'react-router-dom';
 import { listProductDetails, } from '../actions/productActions'
+import { Link as ReLink } from 'react-router-dom';
+import axios from 'axios'
+import Rating from '../components/Rating';
 
 function ProductScreen({ match }) {
   const dispatch = useDispatch()
@@ -37,51 +41,63 @@ function ProductScreen({ match }) {
     'price': 89.99,
     'countInStock': 10,
      */}
-      <Stack as={Center} direction={['column', 'row']}>
+      <Button colorScheme="teal" as={ReLink} mt="10px" to="/">
+        Go Back
+      </Button>
+
+      <Stack as={Center} direction={['column', 'column', 'column', 'row']} mt="40px">
         <Box shadow="md" w={['360px', '450px']}>
           <Image src={product.image}></Image>
         </Box>
-        <Box shadow="md" as={Center} h="300px" w="250px">
+
+        <Spacer />
+
+        <Box as={Center} h="300px" w={['90vw', '90vw', '90vw', '30vw']}>
           <VStack>
-            <Box>{product.name}</Box>
+            <Box><Heading size="lg" fontSize="30px">{product.name} </Heading></Box>
             <Divider />
-            <Box>{product.price}</Box>
+            <Box>
+              <Text align="left" size="md" >
+                Price : ${product.price}
+              </Text>
+            </Box>
             <Divider />
-            <Box>{product.description}</Box>
+            <Box>
+              <Text fontSize="lg">
+                Description: {product.description}
+              </Text>
+            </Box>
           </VStack>
         </Box>
+
+        <Spacer />
+
         <Box shadow="md" as={Center}>
-          <Table variant="striped">
+          <Table variant="simple">
             <Tbody>
               <Tr>
-                <Td>inches</Td>
-                <Td>millimetres (mm)</Td>
+                <Td>Price:</Td>
+                <Td>${product.price}</Td>
               </Tr>
               <Tr>
-                <Td>feet</Td>
-                <Td>centimetres (cm)</Td>
+                <Td>Status:</Td>
+                <Td>{product.countInStock > 0 ? 'In Stock' : 'Out Of Stock'}</Td>
               </Tr>
               <Tr>
-                <Td>yards</Td>
-                <Td>metres (m)</Td>
+                <Td>Review:</Td>
+                <Td>
+                  <Rating value={product.rating} text={`${product.numReviews} reviews`} />
+                </Td>
               </Tr>
               <Tr>
-                <Td as={Center}>
-                  <Button>Add to cart</Button>
+                <Td>
+                  <Button disabled={product.countInStock === 0} size="md" colorScheme="teal">Add to cart</Button>
                 </Td>
               </Tr>
             </Tbody>
           </Table>
         </Box>
       </Stack>
-
-      <Center >
-        <Link as={ReLink} to="/">
-          Go Back
-        </Link>
-        <br />
-        Hello {product.name}
-      </Center>
     </>
   );
 }
