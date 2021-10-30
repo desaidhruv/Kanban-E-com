@@ -18,12 +18,12 @@ function HomeScreen() {
   return (
     <>
       {loading ? <Loading /> 
-        : error ? <Message status="error"><AlertIcon />{error}</Message> 
+        : error ? <Message status="error"><AlertIcon />{error}</Message>
           : <SimpleGrid pt="20px" spacing="50px" columns={{ sm: 1, md: 2, lg: 3 }}>
             {products.map(product => (
-              <Product product={product} key={product._id}/>
+              <Product product={product} key={product._id} />
             ))}
-            </SimpleGrid>
+          </SimpleGrid>
       }
     </>
   );

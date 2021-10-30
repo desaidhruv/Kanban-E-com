@@ -1,5 +1,5 @@
-import {React, useState, useEffect} from 'react';
-import products from '../products';
+import { React, useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux'
 import {
   Box,
   Stack,
@@ -17,24 +17,19 @@ import {
   Text,
 } from '@chakra-ui/react';
 
+import { listProductDetails, } from '../actions/productActions'
 import { Link as ReLink } from 'react-router-dom';
 import axios from 'axios'
 import Rating from '../components/Rating';
 
 function ProductScreen({ match }) {
-  const [product, setProduct] = useState([])
-  console.log(products);
+  const dispatch = useDispatch()
+  const productDetails = useSelector(state => state.productDetails)
+  const { loading, error, product } = productDetails
+
   useEffect(() => {
-
-    async function fetchProduct(){
-      const { data } = await axios.get(`/api/products/${match.params.id}`)
-      setProduct(data)
-    }
-    fetchProduct()
-
+    dispatch(listProductDetails(match.params.id))
   }, [])
-  // const product = products.find(p => p._id === match.params.id);
-  
   return (
     <>
       {/* '_id': '1',
