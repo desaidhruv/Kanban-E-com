@@ -53,6 +53,9 @@ export default function Header() {
                     </Box>
                     <Spacer />
                     <Box display={{ base: 'none', md: 'flex' }}>
+                        <Button as={ReLink} colorScheme="green" mr="4" to="/cart">
+                            Cart
+                        </Button>
                         <Button colorScheme="green" mr="4">
                             Sign Up
                         </Button>

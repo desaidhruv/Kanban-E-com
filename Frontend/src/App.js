@@ -7,6 +7,7 @@ import HomeScreen from './screens/HomeScreen';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import login from './screens/LoginScreen';
 import productScreen from './screens/ProductScreen';
+import cartScreen from './screens/CartScreen';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
             <Route exact path="/" component={HomeScreen} />
             <Route path="/login" component={login} />
             <Route path="/product/:id" component={productScreen} />
+            <Route path="/cart/:id?" component={cartScreen} />
           </Switch>
           {/* <HomeScreen /> */}
           {/* <Card /> */}
