@@ -21,6 +21,8 @@ import { listProductDetails, } from '../actions/productActions'
 import { Link as ReLink } from 'react-router-dom';
 import axios from 'axios'
 import Rating from '../components/Rating';
+import Loading from '../components/Loading';
+import Message from '../components/Message';
 
 function ProductScreen({ match }) {
   const dispatch = useDispatch()
@@ -29,7 +31,7 @@ function ProductScreen({ match }) {
 
   useEffect(() => {
     dispatch(listProductDetails(match.params.id))
-  }, [])
+  }, [dispatch, match])
   return (
     <>
       {/* '_id': '1',
@@ -44,60 +46,68 @@ function ProductScreen({ match }) {
       <Button colorScheme="teal" as={ReLink} mt="10px" to="/">
         Go Back
       </Button>
+      {loading ?
+        <Loading />
+        : error
+          ? <Message status="error">{error}</Message>
+          : (
+            <Stack as={Center} direction={['column', 'column', 'column', 'row']} mt="40px">
+              <Box shadow="md" w={['360px', '450px']}>
+                <Image src={product.image}></Image>
+              </Box>
 
-      <Stack as={Center} direction={['column', 'column', 'column', 'row']} mt="40px">
-        <Box shadow="md" w={['360px', '450px']}>
-          <Image src={product.image}></Image>
-        </Box>
+              <Spacer />
 
-        <Spacer />
+              <Box as={Center} h="300px" w={['90vw', '90vw', '90vw', '30vw']}>
+                <VStack>
+                  <Box><Heading size="lg" fontSize="30px">{product.name} </Heading></Box>
+                  <Divider />
+                  <Box>
+                    <Text align="left" size="md" >
+                      Price : ${product.price}
+                    </Text>
+                  </Box>
+                  <Divider />
+                  <Box>
+                    <Text fontSize="lg">
+                      Description: {product.description}
+                    </Text>
+                  </Box>
+                </VStack>
+              </Box>
 
-        <Box as={Center} h="300px" w={['90vw', '90vw', '90vw', '30vw']}>
-          <VStack>
-            <Box><Heading size="lg" fontSize="30px">{product.name} </Heading></Box>
-            <Divider />
-            <Box>
-              <Text align="left" size="md" >
-                Price : ${product.price}
-              </Text>
-            </Box>
-            <Divider />
-            <Box>
-              <Text fontSize="lg">
-                Description: {product.description}
-              </Text>
-            </Box>
-          </VStack>
-        </Box>
+              <Spacer />
 
-        <Spacer />
+              <Box shadow="md" as={Center}>
+                <Table variant="simple">
+                  <Tbody>
+                    <Tr>
+                      <Td>Price:</Td>
+                      <Td>${product.price}</Td>
+                    </Tr>
+                    <Tr>
+                      <Td>Status:</Td>
+                      <Td>{product.countInStock > 0 ? 'In Stock' : 'Out Of Stock'}</Td>
+                    </Tr>
+                    <Tr>
+                      <Td>Review:</Td>
+                      <Td>
+                        <Rating value={product.rating} text={`${product.numReviews} reviews`} />
+                      </Td>
+                    </Tr>
+                    <Tr>
+                      <Td>
+                        <Button disabled={product.countInStock === 0} size="md" colorScheme="teal">Add to cart</Button>
+                      </Td>
+                    </Tr>
+                  </Tbody>
+                </Table>
+              </Box>
+            </Stack>
+          )
+      }
 
-        <Box shadow="md" as={Center}>
-          <Table variant="simple">
-            <Tbody>
-              <Tr>
-                <Td>Price:</Td>
-                <Td>${product.price}</Td>
-              </Tr>
-              <Tr>
-                <Td>Status:</Td>
-                <Td>{product.countInStock > 0 ? 'In Stock' : 'Out Of Stock'}</Td>
-              </Tr>
-              <Tr>
-                <Td>Review:</Td>
-                <Td>
-                  <Rating value={product.rating} text={`${product.numReviews} reviews`} />
-                </Td>
-              </Tr>
-              <Tr>
-                <Td>
-                  <Button disabled={product.countInStock === 0} size="md" colorScheme="teal">Add to cart</Button>
-                </Td>
-              </Tr>
-            </Tbody>
-          </Table>
-        </Box>
-      </Stack>
+
     </>
   );
 }

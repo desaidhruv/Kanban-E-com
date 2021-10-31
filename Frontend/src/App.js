@@ -5,7 +5,7 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import HomeScreen from './screens/HomeScreen';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import login from './components/Login';
+import login from './screens/LoginScreen';
 import productScreen from './screens/ProductScreen';
 
 function App() {
